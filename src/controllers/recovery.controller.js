@@ -1,0 +1,2 @@
+import {requestReset,resetPassword} from '../services/recovery.service.js'
+export default{request:async(req,res)=>{try{await requestReset(req.body.email,process.env.BASE_URL);res.json({ok:true})}catch(e){res.status(400).json({error:e.message})}},reset:async(req,res)=>{try{const {token,email,newPassword}={...req.query,...req.body};await resetPassword({token,email,newPassword});res.json({ok:true})}catch(e){res.status(400).json({error:e.message})}}}

@@ -1,0 +1,2 @@
+import UserRepo from '../repository/UserRepository.js';import {compare} from '../utils/bcrypt.js';import {sign} from '../utils/jwt.js';import UserDTO from '../dto/user.dto.js'
+export async function login(email,password){const user=await UserRepo.getByEmail(email);if(!user||!compare(password,user.password))throw new Error('Credenciales inválidas');const token=sign({id:user._id,role:user.role},'1h');return {token,user:new UserDTO(user)}}

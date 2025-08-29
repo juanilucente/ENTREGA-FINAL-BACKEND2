@@ -1,0 +1,2 @@
+import {addToCart,purchase} from '../services/cart.service.js'
+export default{add:async(req,res)=>{try{const cart=await addToCart(req.params.cid,req.params.pid,Number(req.body.quantity)||1);res.json(cart)}catch(e){res.status(400).json({error:e.message})}},buy:async(req,res)=>{try{const result=await purchase(req.params.cid,req.user.email);res.json(result)}catch(e){res.status(400).json({error:e.message})}}}

@@ -1,0 +1,2 @@
+import {register,listUsers} from '../services/user.service.js';import UserDTO from '../dto/user.dto.js'
+export default{register:async(req,res)=>{try{const dto=await register(req.body);res.status(201).json(dto)}catch(e){res.status(400).json({error:e.message})}},current:async(req,res)=>{res.json(new UserDTO(req.user))},list:async(req,res)=>{try{res.json(await listUsers())}catch(e){res.status(500).json({error:e.message})}}}
